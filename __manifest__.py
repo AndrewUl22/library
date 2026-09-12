@@ -8,11 +8,14 @@ Includes:
 - library.book (books)
 - library.member (members)
 - library.loan (book loans)
+- Two security groups (User / Librarian) with record rules,
+  so a regular member only sees their own loans
 """,
     'category': 'Tools',
     'author': 'Andrew',
     'depends': ['base', 'mail'],
     'data': [
+        'security/library_security.xml',
         'security/ir.model.access.csv',
         'views/library_book_views.xml',
         'views/library_member_views.xml',

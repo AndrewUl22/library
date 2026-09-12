@@ -28,10 +28,7 @@ class LibraryBook(models.Model):
             )
             book.is_available = not open_loans
 
-    _sql_constraints = [
-        (
-            'isbn_unique',
-            'unique(isbn)',
-            'A book with this ISBN already exists.',
-        ),
-    ]
+    _isbn_unique = models.Constraint(
+        'unique(isbn)',
+        'A book with this ISBN already exists.',
+    )

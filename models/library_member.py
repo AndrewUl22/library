@@ -10,6 +10,12 @@ class LibraryMember(models.Model):
     name = fields.Char(string='Full Name', required=True)
     email = fields.Char(string='Email')
     phone = fields.Char(string='Phone')
+    user_id = fields.Many2one(
+        'res.users',
+        string='Related User',
+        help='Link to a login account, so this member can be '
+             'restricted to seeing only their own loans.',
+    )
 
     loan_ids = fields.One2many(
         'library.loan', 'member_id', string='Loans'

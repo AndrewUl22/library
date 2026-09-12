@@ -27,6 +27,19 @@ class LibraryLoan(models.Model):
         string='Status',
         default='ongoing',
     )
+    is_overdue = fields.Boolean(
+        string='Overdue', compute='_compute_is_overdue'
+    )
+
+    @api.depends('due_date', 'state')
+    def _compute_is_overdue(self):
+        today = fields.Date.context_today(self)
+        for loan in self:
+            loan.is_overdue = bool(
+                loan.due_date
+                and loan.state == 'ongoing'
+                and loan.due_date < today
+            )
 
     @api.constrains('book_id', 'state')
     def _check_book_available(self):

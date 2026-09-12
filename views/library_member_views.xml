@@ -9,6 +9,7 @@
                 <field name="name"/>
                 <field name="email"/>
                 <field name="phone"/>
+                <field name="user_id" optional="show"/>
                 <field name="loan_count"/>
             </list>
         </field>
@@ -26,6 +27,7 @@
                     <group>
                         <field name="email"/>
                         <field name="phone"/>
+                        <field name="user_id"/>
                         <field name="loan_count"/>
                     </group>
                     <notebook>
