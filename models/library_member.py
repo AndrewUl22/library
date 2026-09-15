@@ -5,11 +5,18 @@ from odoo import api, fields, models
 class LibraryMember(models.Model):
     _name = 'library.member'
     _description = 'Library Member'
+    _inherits = {'res.partner': 'partner_id'}
     _order = 'name'
 
-    name = fields.Char(string='Full Name', required=True)
-    email = fields.Char(string='Email')
-    phone = fields.Char(string='Phone')
+    partner_id = fields.Many2one(
+        'res.partner',
+        string='Related Contact',
+        required=True,
+        ondelete='restrict',
+        auto_join=True,
+        help='name/email/phone below are delegated to this contact '
+             'record via _inherits, the same pattern res.users uses.',
+    )
     user_id = fields.Many2one(
         'res.users',
         string='Related User',

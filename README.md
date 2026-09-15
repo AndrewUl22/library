@@ -2,8 +2,11 @@
 
 ## What's inside
 - `library.book` — books (title, author, ISBN, availability — a computed field)
-- `library.member` — members, optionally linked to a login account (`user_id`)
+- `library.member` — members, delegated from `res.partner` via `_inherits`
+  (same pattern `res.users` uses), optionally linked to a login account (`user_id`)
 - `library.loan` — loans (book ↔ member, status ongoing/returned, `is_overdue` computed field)
+- A "Lend a Book" wizard (`library.loan.wizard`) for creating loans through a small dialog
+  instead of a raw `library.loan` form
 - A constraint: a book can't be lent out if it's already on loan to another member
 - Two security groups — **User** and **Librarian** — with record rules:
   a regular member only sees loans linked to their own account,
@@ -25,8 +28,6 @@
 Ideas for extending the module further:
 
 - Add a kanban view for books
-- Switch `library.member` to `_inherits` from `res.partner` instead of its own name/email/phone fields
-- Add a "Lend a book" wizard instead of creating `library.loan` records directly
 - Add unit tests
 
 ## Known simplifications
