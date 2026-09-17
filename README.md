@@ -1,7 +1,7 @@
 # Library — Odoo training module
 
 ## What's inside
-- `library.book` — books (title, author, ISBN, availability — a computed field)
+- `library.book` — books (title, author, ISBN, availability — a computed field), with a kanban view alongside list/form
 - `library.member` — members, delegated from `res.partner` via `_inherits`
   (same pattern `res.users` uses), optionally linked to a login account (`user_id`)
 - `library.loan` — loans (book ↔ member, status ongoing/returned, `is_overdue` computed field)
@@ -11,6 +11,9 @@
 - Two security groups — **User** and **Librarian** — with record rules:
   a regular member only sees loans linked to their own account,
   a librarian sees every loan
+- Unit tests (`tests/test_library.py`) covering the constraint, availability,
+  `is_overdue`, the wizard, and the record rule that restricts a member to
+  their own loans
 
 ## Installation
 1. Copy the `library` folder into `addons/` in your Odoo clone:
@@ -23,14 +26,11 @@
    ```
 3. Open `http://localhost:8069` — "Library" will appear in the top menu.
 
-## Roadmap
-
-Ideas for extending the module further:
-
-- Add a kanban view for books
-- Add unit tests
+## Running the tests
+```bash
+./odoo-bin -d mydb --addons-path=addons,odoo/addons -i library --test-enable --stop-after-init
+```
 
 ## Known simplifications
 - No loan-period limit (`due_date` isn't filled in automatically)
 - No automatic overdue notifications
-- No tests yet

@@ -14,14 +14,11 @@ class LibraryMember(models.Model):
         required=True,
         ondelete='restrict',
         auto_join=True,
-        help='name/email/phone below are delegated to this contact '
-             'record via _inherits, the same pattern res.users uses.',
     )
     user_id = fields.Many2one(
         'res.users',
         string='Related User',
-        help='Link to a login account, so this member can be '
-             'restricted to seeing only their own loans.',
+        help='Restricts this member to seeing only their own loans.',
     )
 
     loan_ids = fields.One2many(

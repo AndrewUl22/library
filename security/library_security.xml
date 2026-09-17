@@ -6,8 +6,7 @@
         <field name="sequence">20</field>
     </record>
 
-    <!-- Odoo 19: res.groups no longer has category_id directly;
-         a group is now linked to a category through res.groups.privilege -->
+    <!-- Odoo 19: category goes through res.groups.privilege now -->
     <record id="privilege_library" model="res.groups.privilege">
         <field name="name">Library Access</field>
         <field name="category_id" ref="module_category_library"/>
