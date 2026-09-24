@@ -18,7 +18,7 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U odoo"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run module tests inside the official Odoo image
+      - name: Install library (no tests yet) on a fresh database
         run: |
           docker run --rm \
             --network="host" \
@@ -35,4 +35,15 @@ jobs:
             -e PASSWORD=odoo \
             -v ${{ github.workspace }}:/mnt/extra-addons \
             odoo:19 \
-            -d test_db -i library --test-enable --stop-after-init
+            -d test_db -i library --without-demo=all --stop-after-init
+
+      - name: Run only library's own tests
+        run: |
+          docker run --rm \
+            --network="host" \
+            -e HOST=127.0.0.1 \
+            -e USER=odoo \
+            -e PASSWORD=odoo \
+            -v ${{ github.workspace }}:/mnt/extra-addons \
+            odoo:19 \
+            -d test_db -u library --test-enable --test-tags /library --stop-after-init

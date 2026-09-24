@@ -25,9 +25,10 @@
    ```bash
    cp -r library /path/to/odoo/addons/
    ```
-2. Run Odoo with this addons-path and the install flag (demo data loads by default):
+2. Run Odoo with this addons-path and the install flag (Odoo 19 requires
+   `--with-demo` explicitly, unlike earlier versions):
    ```bash
-   ./odoo-bin -d mydb --addons-path=addons,odoo/addons -i library --dev=all
+   ./odoo-bin -d mydb --addons-path=addons,odoo/addons -i library --with-demo --dev=all
    ```
 3. Open `http://localhost:8069` — "Library" will appear in the top menu, already
    populated with sample books, members, and loans.
@@ -35,7 +36,7 @@
 
 ## Running the tests
 ```bash
-./odoo-bin -d mydb --addons-path=addons,odoo/addons -i library --test-enable --stop-after-init
+./odoo-bin -d mydb --addons-path=addons,odoo/addons -i library --test-enable --test-tags /library --stop-after-init
 ```
 
 ## Screenshots

@@ -27,9 +27,9 @@
                         <t t-set="ongoing_loans"
                            t-value="o.loan_ids.filtered(lambda l: l.state == 'ongoing')"/>
                         <tr t-foreach="ongoing_loans" t-as="loan">
-                            <td t-field="loan.book_id.name"/>
-                            <td t-field="loan.loan_date"/>
-                            <td t-field="loan.due_date"/>
+                            <td><span t-field="loan.book_id.name"/></td>
+                            <td><span t-field="loan.loan_date"/></td>
+                            <td><span t-field="loan.due_date"/></td>
                             <td>
                                 <span t-if="loan.is_overdue" class="text-danger">
                                     Overdue
