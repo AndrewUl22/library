@@ -6,7 +6,21 @@ A custom Odoo 19 module for managing a small library: books, members, and
 loans, with role-based access, a guided lending workflow, and a printable
 member report.
 
-**Live:** the module runs on Render next to my portfolio page, [https://odoo-portfolio-xfy2.onrender.com/portfolio](https://odoo-portfolio-xfy2.onrender.com/portfolio) (free tier, so the first request after a pause can take up to a minute; the app itself requires a login, see the screenshots below).
+## Live demo
+
+The module runs on Odoo 19 on Render. No login is needed, each link signs you
+in as a ready-made demo user:
+
+- **[Open as Librarian](https://odoo-portfolio-xfy2.onrender.com/demo)**: full access to the library data (books, members, loans, the "Lend a Book" wizard, the PDF report)
+- **[Open as Member](https://odoo-portfolio-xfy2.onrender.com/demo/member)**: a regular reader who only sees their own loans (the record rule in action)
+
+If the links do not work, sign in at the
+[login page](https://odoo-portfolio-xfy2.onrender.com/web/login) with
+`librarian / librarian` or `member / member`.
+
+Notes: the demo passwords are public by design. The demo runs on the free
+Render tier, so the first request after a pause can take up to a minute, and
+data added by visitors is cleared when the service restarts.
 
 ## About the project
 
@@ -32,10 +46,11 @@ applying for a Back-end Developer position at Odoo.
 - **Kanban view** for browsing the book catalog
 - **PDF "Reading Card" report** — per-member printable report listing their
   current loans
-- **Demo data** — 5 books, 3 members, and loans in different states
-  (ongoing, returned, overdue) to explore the module immediately
+- **Demo data** — 7 books, 4 members, and loans in different states
+  (ongoing, returned, overdue) to explore the module immediately, plus two
+  demo users (`librarian` and `member`) to try both roles
 - **Unit tests** covering the availability constraint, `is_overdue`, the
-  lending wizard, and the member record rule
+  lending wizard, and the record rules of both roles
 - **CI** — GitHub Actions runs the test suite (via the official `odoo:19`
   Docker image) on every push
 
@@ -62,7 +77,7 @@ applying for a Back-end Developer position at Odoo.
 - Odoo 19 (Python, ORM)
 - PostgreSQL
 - QWeb (views and PDF report)
-- Owl / XML views (form, list, kanban, search)
+- XML views (form, list, kanban, search)
 
 ## Getting Started
 
@@ -84,7 +99,8 @@ odoo-bin -d mydb --addons-path=addons,odoo/addons -i library --with-demo=all
 > `--with-demo` to be passed explicitly.
 
 Open `http://localhost:8069`, select your database, and look for **Library**
-in the Apps menu.
+in the Apps menu. With demo data you can also sign in as `librarian` or
+`member` (password is the same as the login).
 
 ### Running tests
 
